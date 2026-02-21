@@ -1,0 +1,35 @@
+{
+    "agents": {
+        "jarvis": {
+            "status": "online",
+            "task": "Coordinating Syndicate operations",
+            "metric": "∞"
+        },
+        "spectre": {
+            "status": "idle",
+            "task": "Awaiting assignment",
+            "metric": "0"
+        },
+        "quill": {
+            "status": "idle",
+            "task": "Awaiting assignment",
+            "metric": "0"
+        },
+        "forge": {
+            "status": "idle",
+            "task": "Awaiting assignment",
+            "metric": "0"
+        },
+        "echo": {
+            "status": "idle",
+            "task": "Awaiting assignment",
+            "metric": "0"
+        }
+    },
+    "stats": {
+        "tasksToday": 0,
+        "shortsProduced": 0,
+        "uptime": "99.9%"
+    },
+    "lastUpdated": "2026-02-21T14:47:00Z"
+}

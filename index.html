@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syndicate — HQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <h1>THE SYNDICATE</h1>
+            </div>
+            <div class="status-indicator">
+                <span class="pulse"></span>
+                <span class="status-text">OPERATIONAL</span>
+            </div>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-value" id="activeAgents">5</span>
+                <span class="stat-label">AGENTS</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="tasksToday">0</span>
+                <span class="stat-label">TASKS TODAY</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="shortsProduced">0</span>
+                <span class="stat-label">SHORTS PRODUCED</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="systemUptime">99.9%</span>
+                <span class="stat-label">UPTIME</span>
+            </div>
+        </div>
+
+        <main class="agents-grid">
+            <!-- Jarvis - Command -->
+            <div class="agent-card jarvis">
+                <div class="agent-header">
+                    <div class="agent-avatar">
+                        <span>J</span>
+                    </div>
+                    <div class="agent-info">
+                        <h2 class="agent-name">JARVIS</h2>
+                        <span class="agent-role">Chief of Operations</span>
+                    </div>
+                    <div class="agent-status online">
+                        <span class="status-dot"></span>
+                        <span>ONLINE</span>
+                    </div>
+                </div>
+                <div class="agent-body">
+                    <div class="current-task">
+                        <span class="task-label">CURRENT TASK</span>
+                        <p class="task-text">Coordinating Syndicate operations</p>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="tag">coordination</span>
+                        <span class="tag">delegation</span>
+                        <span class="tag">strategy</span>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <div class="metric">
+                        <span class="metric-value">∞</span>
+                        <span class="metric-label">Tasks Delegated</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spectre - Research -->
+            <div class="agent-card spectre">
+                <div class="agent-header">
+                    <div class="agent-avatar">
+                        <span>S</span>
+                    </div>
+                    <div class="agent-info">
+                        <h2 class="agent-name">SPECTRE</h2>
+                        <span class="agent-role">Research & Intelligence</span>
+                    </div>
+                    <div class="agent-status idle">
+                        <span class="status-dot"></span>
+                        <span>IDLE</span>
+                    </div>
+                </div>
+                <div class="agent-body">
+                    <div class="current-task">
+                        <span class="task-label">CURRENT TASK</span>
+                        <p class="task-text">Awaiting assignment</p>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="tag">trends</span>
+                        <span class="tag">research</span>
+                        <span class="tag">intel</span>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <div class="metric">
+                        <span class="metric-value">0</span>
+                        <span class="metric-label">Stories Found</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quill - Writing -->
+            <div class="agent-card quill">
+                <div class="agent-header">
+                    <div class="agent-avatar">
+                        <span>Q</span>
+                    </div>
+                    <div class="agent-info">
+                        <h2 class="agent-name">QUILL</h2>
+                        <span class="agent-role">Writing & Scripts</span>
+                    </div>
+                    <div class="agent-status idle">
+                        <span class="status-dot"></span>
+                        <span>IDLE</span>
+                    </div>
+                </div>
+                <div class="agent-body">
+                    <div class="current-task">
+                        <span class="task-label">CURRENT TASK</span>
+                        <p class="task-text">Awaiting assignment</p>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="tag">scripts</span>
+                        <span class="tag">voiceover</span>
+                        <span class="tag">hooks</span>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <div class="metric">
+                        <span class="metric-value">0</span>
+                        <span class="metric-label">Scripts Written</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forge - Production -->
+            <div class="agent-card forge">
+                <div class="agent-header">
+                    <div class="agent-avatar">
+                        <span>F</span>
+                    </div>
+                    <div class="agent-info">
+                        <h2 class="agent-name">FORGE</h2>
+                        <span class="agent-role">Video Production</span>
+                    </div>
+                    <div class="agent-status idle">
+                        <span class="status-dot"></span>
+                        <span>IDLE</span>
+                    </div>
+                </div>
+                <div class="agent-body">
+                    <div class="current-task">
+                        <span class="task-label">CURRENT TASK</span>
+                        <p class="task-text">Awaiting assignment</p>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="tag">video</span>
+                        <span class="tag">editing</span>
+                        <span class="tag">assembly</span>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <div class="metric">
+                        <span class="metric-value">0</span>
+                        <span class="metric-label">Videos Produced</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Echo - Distribution -->
+            <div class="agent-card echo">
+                <div class="agent-header">
+                    <div class="agent-avatar">
+                        <span>E</span>
+                    </div>
+                    <div class="agent-info">
+                        <h2 class="agent-name">ECHO</h2>
+                        <span class="agent-role">Distribution & Publishing</span>
+                    </div>
+                    <div class="agent-status idle">
+                        <span class="status-dot"></span>
+                        <span>IDLE</span>
+                    </div>
+                </div>
+                <div class="agent-body">
+                    <div class="current-task">
+                        <span class="task-label">CURRENT TASK</span>
+                        <p class="task-text">Awaiting assignment</p>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="tag">upload</span>
+                        <span class="tag">scheduling</span>
+                        <span class="tag">platforms</span>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <div class="metric">
+                        <span class="metric-value">0</span>
+                        <span class="metric-label">Videos Published</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-left">
+                <span class="timestamp">Last updated: <span id="lastUpdate">--</span></span>
+            </div>
+            <div class="footer-right">
+                <span class="version">SYNDICATE HQ v1.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
