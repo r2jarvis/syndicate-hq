@@ -24,7 +24,7 @@
 
         <div class="stats-bar">
             <div class="stat">
-                <span class="stat-value" id="activeAgents">5</span>
+                <span class="stat-value" id="activeAgents">6</span>
                 <span class="stat-label">AGENTS</span>
             </div>
             <div class="stat">
@@ -104,6 +104,17 @@
                             <span class="node-title">FORGE</span>
                             <span class="node-subtitle">Video Production</span>
                         </div>
+                        <div class="node-status working">⟳ PRODUCING</div>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="hierarchy-node agent-node sentinel-node">
+                        <div class="node-icon">🛡️</div>
+                        <div class="node-info">
+                            <span class="node-title">SENTINEL</span>
+                            <span class="node-subtitle">QA & Approval</span>
+                        </div>
                         <div class="node-status queued">◷ QUEUED</div>
                     </div>
                     
@@ -132,17 +143,24 @@
                     <div class="stage-status">4 hooks found</div>
                 </div>
                 <div class="pipeline-connector active"></div>
-                <div class="pipeline-stage active">
+                <div class="pipeline-stage completed">
                     <div class="stage-icon">✍️</div>
                     <div class="stage-name">SCRIPT</div>
                     <div class="stage-agent">Quill</div>
-                    <div class="stage-status">Writing 4 scripts...</div>
+                    <div class="stage-status">4 scripts ready</div>
                 </div>
-                <div class="pipeline-connector"></div>
-                <div class="pipeline-stage">
+                <div class="pipeline-connector active"></div>
+                <div class="pipeline-stage active">
                     <div class="stage-icon">🎬</div>
                     <div class="stage-name">PRODUCE</div>
                     <div class="stage-agent">Forge</div>
+                    <div class="stage-status">Building 4 Shorts...</div>
+                </div>
+                <div class="pipeline-connector"></div>
+                <div class="pipeline-stage">
+                    <div class="stage-icon">🛡️</div>
+                    <div class="stage-name">QA CHECK</div>
+                    <div class="stage-agent">Sentinel</div>
                     <div class="stage-status">Waiting</div>
                 </div>
                 <div class="pipeline-connector"></div>
@@ -189,6 +207,21 @@
             <h2 class="section-title">RECENT ACTIVITY</h2>
             <div class="activity-log">
                 <div class="activity-item">
+                    <span class="activity-time">17:42</span>
+                    <span class="activity-agent forge">FORGE</span>
+                    <span class="activity-text">Producing 4 Shorts (1080p, captions @ 75%)</span>
+                </div>
+                <div class="activity-item">
+                    <span class="activity-time">17:40</span>
+                    <span class="activity-agent jarvis">JARVIS</span>
+                    <span class="activity-text">Added SENTINEL to pipeline — QA gatekeeper</span>
+                </div>
+                <div class="activity-item">
+                    <span class="activity-time">17:35</span>
+                    <span class="activity-agent quill">QUILL</span>
+                    <span class="activity-text">Delivered 4 scripts (avg 45s each)</span>
+                </div>
+                <div class="activity-item">
                     <span class="activity-time">17:26</span>
                     <span class="activity-agent spectre">SPECTRE</span>
                     <span class="activity-text">Found 4 viral story hooks (2 horror, 2 drama)</span>
@@ -213,7 +246,7 @@
 
         <footer class="footer">
             <div class="footer-left">
-                <span class="timestamp">Last updated: <span id="lastUpdate">Feb 21, 2026 17:26 PST</span></span>
+                <span class="timestamp">Last updated: <span id="lastUpdate">Feb 21, 2026 17:42 PST</span></span>
             </div>
             <div class="footer-right">
                 <span class="version">SYNDICATE HQ v2.0</span>
