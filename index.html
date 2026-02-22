@@ -28,16 +28,16 @@
                 <span class="stat-label">AGENTS</span>
             </div>
             <div class="stat">
-                <span class="stat-value" id="tasksToday">6</span>
-                <span class="stat-label">TASKS TODAY</span>
+                <span class="stat-value" id="videosLive">0</span>
+                <span class="stat-label">LIVE VIDEOS</span>
             </div>
             <div class="stat">
-                <span class="stat-value" id="shortsProduced">5</span>
-                <span class="stat-label">SHORTS LIVE</span>
-            </div>
-            <div class="stat">
-                <span class="stat-value" id="inProgress">0</span>
+                <span class="stat-value" id="videosInProduction">0</span>
                 <span class="stat-label">IN PRODUCTION</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="tasksCompleted">0</span>
+                <span class="stat-label">TASKS DONE</span>
             </div>
         </div>
 
@@ -135,68 +135,68 @@
         <!-- PIPELINE FLOW -->
         <section class="pipeline-section">
             <h2 class="section-title">CONTENT PIPELINE</h2>
-            <div class="pipeline">
-                <div class="pipeline-stage completed">
+            <div class="pipeline" id="pipelineContainer">
+                <div class="pipeline-stage" id="stage-research">
                     <div class="stage-icon">🔍</div>
                     <div class="stage-name">RESEARCH</div>
                     <div class="stage-agent">Spectre</div>
-                    <div class="stage-status">4 hooks found</div>
+                    <div class="stage-status" id="stage-research-status">--</div>
                 </div>
-                <div class="pipeline-connector active"></div>
-                <div class="pipeline-stage completed">
+                <div class="pipeline-connector"></div>
+                <div class="pipeline-stage" id="stage-script">
                     <div class="stage-icon">✍️</div>
                     <div class="stage-name">SCRIPT</div>
                     <div class="stage-agent">Quill</div>
-                    <div class="stage-status">5 scripts delivered</div>
+                    <div class="stage-status" id="stage-script-status">--</div>
                 </div>
-                <div class="pipeline-connector active"></div>
-                <div class="pipeline-stage completed">
+                <div class="pipeline-connector"></div>
+                <div class="pipeline-stage" id="stage-produce">
                     <div class="stage-icon">🎬</div>
                     <div class="stage-name">PRODUCE</div>
                     <div class="stage-agent">Forge</div>
-                    <div class="stage-status">5 Shorts assembled</div>
+                    <div class="stage-status" id="stage-produce-status">--</div>
                 </div>
-                <div class="pipeline-connector active"></div>
-                <div class="pipeline-stage completed">
+                <div class="pipeline-connector"></div>
+                <div class="pipeline-stage" id="stage-qa">
                     <div class="stage-icon">🛡️</div>
                     <div class="stage-name">QA CHECK</div>
                     <div class="stage-agent">Sentinel</div>
-                    <div class="stage-status">5 approved</div>
+                    <div class="stage-status" id="stage-qa-status">--</div>
                 </div>
-                <div class="pipeline-connector active"></div>
-                <div class="pipeline-stage completed">
+                <div class="pipeline-connector"></div>
+                <div class="pipeline-stage" id="stage-publish">
                     <div class="stage-icon">📤</div>
                     <div class="stage-name">PUBLISH</div>
                     <div class="stage-agent">Echo</div>
-                    <div class="stage-status">5 live</div>
+                    <div class="stage-status" id="stage-publish-status">--</div>
                 </div>
             </div>
         </section>
 
         <!-- CHANNELS -->
         <section class="channels-section">
-            <h2 class="section-title">CHANNELS</h2>
-            <div class="channels-grid">
-                <div class="channel-card">
+            <h2 class="section-title">LIVE VIDEO COUNT PER CHANNEL</h2>
+            <div class="channels-grid" id="channelsContainer">
+                <div class="channel-card" id="channel-DarkTalesDaily">
                     <div class="channel-icon">👻</div>
                     <div class="channel-info">
                         <span class="channel-name">DarkTalesDaily</span>
                         <span class="channel-niche">Scary Stories</span>
                     </div>
                     <div class="channel-stats">
-                        <span class="channel-videos">3 live</span>
-                        <span class="channel-pending">+0 coming</span>
+                        <span class="channel-videos" id="channel-DarkTalesDaily-count">-- live</span>
+                        <span class="channel-pending" id="channel-DarkTalesDaily-pending">-- coming</span>
                     </div>
                 </div>
-                <div class="channel-card">
+                <div class="channel-card" id="channel-RedditTeaTime">
                     <div class="channel-icon">☕</div>
                     <div class="channel-info">
                         <span class="channel-name">RedditTeaTime</span>
                         <span class="channel-niche">Reddit Drama</span>
                     </div>
                     <div class="channel-stats">
-                        <span class="channel-videos">2 live</span>
-                        <span class="channel-pending">+0 coming</span>
+                        <span class="channel-videos" id="channel-RedditTeaTime-count">-- live</span>
+                        <span class="channel-pending" id="channel-RedditTeaTime-pending">-- coming</span>
                     </div>
                 </div>
             </div>
@@ -204,42 +204,12 @@
 
         <!-- ACTIVITY LOG -->
         <section class="activity-section">
-            <h2 class="section-title">RECENT ACTIVITY</h2>
-            <div class="activity-log">
+            <h2 class="section-title">ACTIVITY LOG - LATEST UPLOADS</h2>
+            <div class="activity-log" id="activityLog">
                 <div class="activity-item">
-                    <span class="activity-time">07:29</span>
-                    <span class="activity-agent echo">ECHO</span>
-                    <span class="activity-text">Batch 2 complete: 4 Shorts live (2 DarkTales, 2 RedditTea)</span>
-                </div>
-                <div class="activity-item">
-                    <span class="activity-time">07:26</span>
-                    <span class="activity-agent sentinel">SENTINEL</span>
-                    <span class="activity-text">QA approved all 4 videos — captions synced, 1080p confirmed</span>
-                </div>
-                <div class="activity-item">
-                    <span class="activity-time">02:21</span>
-                    <span class="activity-agent forge">FORGE</span>
-                    <span class="activity-text">Assembled 4 Shorts with word-by-word captions (ElevenLabs timestamps)</span>
-                </div>
-                <div class="activity-item">
-                    <span class="activity-time">02:15</span>
-                    <span class="activity-agent quill">QUILL</span>
-                    <span class="activity-text">Delivered 4 scripts (avg 45s, 2 horror + 2 drama)</span>
-                </div>
-                <div class="activity-item">
-                    <span class="activity-time">02:10</span>
-                    <span class="activity-agent spectre">SPECTRE</span>
-                    <span class="activity-text">Found 4 trending story hooks from Reddit</span>
-                </div>
-                <div class="activity-item">
-                    <span class="activity-time">Feb 21, 21:23</span>
-                    <span class="activity-agent echo">ECHO</span>
-                    <span class="activity-text">Batch 1 live: Deaf neighbor story → youtube.com/shorts/ViV5-vDSqrE</span>
-                </div>
-                <div class="activity-item">
-                    <span class="activity-time">Feb 21, 18:35</span>
-                    <span class="activity-agent jarvis">JARVIS</span>
-                    <span class="activity-text">EMERGENCY: Switched to Sonnet model — 15x cost reduction</span>
+                    <span class="activity-time">--:--</span>
+                    <span class="activity-agent">--</span>
+                    <span class="activity-text">Loading activity...</span>
                 </div>
             </div>
         </section>

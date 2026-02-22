@@ -1,47 +1,16 @@
-// Syndicate HQ Dashboard
-// Updates agent statuses and metrics
-
+// Syndicate HQ Dashboard - Real-time Video Stats
 const CONFIG = {
     statusFile: 'status.json',
-    refreshInterval: 30000, // 30 seconds
+    refreshInterval: 10000, // 10 seconds
 };
 
-// Agent data (will be loaded from status.json in production)
-let agentData = {
-    jarvis: {
-        status: 'online',
-        task: 'Coordinating Syndicate operations',
-        metric: '∞'
-    },
-    spectre: {
-        status: 'idle',
-        task: 'Awaiting assignment',
-        metric: '0'
-    },
-    quill: {
-        status: 'idle',
-        task: 'Awaiting assignment',
-        metric: '0'
-    },
-    forge: {
-        status: 'idle',
-        task: 'Awaiting assignment',
-        metric: '0'
-    },
-    echo: {
-        status: 'idle',
-        task: 'Awaiting assignment',
-        metric: '0'
-    }
+let statusData = {
+    agents: {},
+    channels: {},
+    pipeline: {},
+    stats: {}
 };
 
-let globalStats = {
-    tasksToday: 0,
-    shortsProduced: 0,
-    uptime: '99.9%'
-};
-
-// Update timestamp
 function updateTimestamp() {
     const now = new Date();
     const formatted = now.toLocaleString('en-US', {
@@ -51,92 +20,133 @@ function updateTimestamp() {
         minute: '2-digit',
         second: '2-digit',
         hour12: false
-    });
+    }) + ' EST';
     document.getElementById('lastUpdate').textContent = formatted;
 }
 
-// Update agent card
-function updateAgentCard(agentId, data) {
-    const card = document.querySelector(`.agent-card.${agentId}`);
-    if (!card) return;
-
-    // Update status
-    const statusEl = card.querySelector('.agent-status');
-    statusEl.className = `agent-status ${data.status}`;
-    statusEl.querySelector('span:last-child').textContent = data.status.toUpperCase();
-
-    // Update task
-    card.querySelector('.task-text').textContent = data.task;
-
-    // Update metric
-    card.querySelector('.metric-value').textContent = data.metric;
+function updateStats() {
+    const stats = statusData.stats || {};
+    document.getElementById('videosLive').textContent = stats.videosLive || '0';
+    document.getElementById('videosInProduction').textContent = stats.videosInProduction || '0';
+    document.getElementById('tasksCompleted').textContent = stats.tasksCompleted || '0';
 }
 
-// Update all agents
-function updateAllAgents() {
-    Object.keys(agentData).forEach(agentId => {
-        updateAgentCard(agentId, agentData[agentId]);
+function updatePipelineStages() {
+    const agents = statusData.agents || {};
+    
+    const stageMap = {
+        'research': { agent: 'spectre', icon: '🔍' },
+        'script': { agent: 'quill', icon: '✍️' },
+        'produce': { agent: 'forge', icon: '🎬' },
+        'qa': { agent: 'sentinel', icon: '🛡️' },
+        'publish': { agent: 'echo', icon: '📤' }
+    };
+    
+    Object.entries(stageMap).forEach(([stage, config]) => {
+        const stageEl = document.getElementById(`stage-${stage}`);
+        const statusEl = document.getElementById(`stage-${stage}-status`);
+        const agent = agents[config.agent];
+        
+        if (stageEl && statusEl && agent) {
+            // Update status class
+            stageEl.className = `pipeline-stage ${agent.status}`;
+            
+            // Update connector
+            const connectors = document.querySelectorAll('.pipeline-connector');
+            const stageIndex = Object.keys(stageMap).indexOf(stage);
+            if (connectors[stageIndex] && agent.status !== 'idle') {
+                connectors[stageIndex].classList.add('active');
+            }
+            
+            // Update status text
+            statusEl.textContent = agent.metric || agent.task || '--';
+        }
     });
 }
 
-// Update global stats
-function updateStats() {
-    document.getElementById('tasksToday').textContent = globalStats.tasksToday;
-    document.getElementById('shortsProduced').textContent = globalStats.shortsProduced;
-    document.getElementById('systemUptime').textContent = globalStats.uptime;
+function updateChannels() {
+    const channels = statusData.channels || {};
+    
+    Object.entries(channels).forEach(([channelName, data]) => {
+        const countEl = document.getElementById(`channel-${channelName}-count`);
+        const pendingEl = document.getElementById(`channel-${channelName}-pending`);
+        
+        if (countEl) countEl.textContent = `${data.videos || 0} live`;
+        if (pendingEl) {
+            const pending = (statusData.stats?.videosInProduction || 0);
+            pendingEl.textContent = `+${pending} coming`;
+        }
+    });
 }
 
-// Fetch status from JSON file
+function updateActivityLog() {
+    const agents = statusData.agents || {};
+    const activityLog = document.getElementById('activityLog');
+    const activities = [];
+    
+    // Generate activity from agent statuses
+    const now = new Date();
+    const timeMap = {
+        'echo': { offset: 0, text: 'Uploading to YouTube' },
+        'sentinel': { offset: 3, text: 'QA Review in progress' },
+        'forge': { offset: 6, text: 'Video assembly' },
+        'quill': { offset: 9, text: 'Script generation' },
+        'spectre': { offset: 12, text: 'Research & sourcing' }
+    };
+    
+    Object.entries(agents).forEach(([agentId, agent]) => {
+        if (agent.status !== 'idle') {
+            const timeOffset = timeMap[agentId]?.offset || 0;
+            const time = new Date(now.getTime() - timeOffset * 60000);
+            const timeStr = time.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            
+            activities.push({
+                time: timeStr,
+                agent: agentId.toUpperCase(),
+                text: agent.task || agent.metric,
+                status: agent.status
+            });
+        }
+    });
+    
+    // Sort by time descending
+    activities.sort((a, b) => b.time.localeCompare(a.time));
+    
+    if (activities.length === 0) {
+        activityLog.innerHTML = '<div class="activity-item"><span class="activity-time">--:--</span><span class="activity-agent">--</span><span class="activity-text">No active uploads</span></div>';
+    } else {
+        activityLog.innerHTML = activities.map(act => `
+            <div class="activity-item">
+                <span class="activity-time">${act.time}</span>
+                <span class="activity-agent ${act.agent.toLowerCase()}">${act.agent}</span>
+                <span class="activity-text">${act.text}</span>
+            </div>
+        `).join('');
+    }
+}
+
 async function fetchStatus() {
     try {
         const response = await fetch(CONFIG.statusFile + '?t=' + Date.now());
         if (response.ok) {
-            const data = await response.json();
-            
-            // Update agent data
-            if (data.agents) {
-                Object.assign(agentData, data.agents);
-            }
-            
-            // Update global stats
-            if (data.stats) {
-                Object.assign(globalStats, data.stats);
-            }
-            
-            updateAllAgents();
+            statusData = await response.json();
             updateStats();
+            updatePipelineStages();
+            updateChannels();
+            updateActivityLog();
         }
     } catch (error) {
         console.log('Status file not found, using defaults');
     }
-    
     updateTimestamp();
 }
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     fetchStatus();
-    updateTimestamp();
-    
-    // Refresh periodically
     setInterval(fetchStatus, CONFIG.refreshInterval);
     setInterval(updateTimestamp, 1000);
 });
-
-// Add some visual flair - random subtle glitch effect
-function glitchEffect() {
-    const cards = document.querySelectorAll('.agent-card');
-    const randomCard = cards[Math.floor(Math.random() * cards.length)];
-    
-    randomCard.style.transform = 'translateX(2px)';
-    setTimeout(() => {
-        randomCard.style.transform = '';
-    }, 50);
-}
-
-// Occasional glitch (every 30-60 seconds)
-setInterval(() => {
-    if (Math.random() > 0.7) {
-        glitchEffect();
-    }
-}, 30000);
